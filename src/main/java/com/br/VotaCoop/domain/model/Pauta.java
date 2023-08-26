@@ -12,7 +12,7 @@ public class Pauta {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private Long id;
 
     @Column(name = "descricao", nullable = false)
     private String descricao;
