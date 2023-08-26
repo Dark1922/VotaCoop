@@ -15,4 +15,7 @@ public class Associado {
 
     @Column(name = "nome", nullable = false)
     private String nome;
+
+    @Column(name = "cpf", nullable = false)
+    private String cpf;
 }
