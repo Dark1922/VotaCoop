@@ -1,4 +1,4 @@
-package com.br.VotaCoop.dto;
+package com.br.VotaCoop.api.dto;
 
 import lombok.Getter;
 import lombok.Setter;

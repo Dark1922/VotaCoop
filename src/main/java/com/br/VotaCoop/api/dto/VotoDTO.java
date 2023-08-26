@@ -1,7 +1,7 @@
-package com.br.VotaCoop.dto;
+package com.br.VotaCoop.api.dto;
 
-import com.br.VotaCoop.model.Associado;
-import com.br.VotaCoop.model.SessaoVotacao;
+import com.br.VotaCoop.domain.model.Associado;
+import com.br.VotaCoop.domain.model.SessaoVotacao;
 import lombok.Getter;
 import lombok.Setter;
 

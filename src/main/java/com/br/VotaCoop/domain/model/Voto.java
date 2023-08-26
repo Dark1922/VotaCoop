@@ -1,4 +1,4 @@
-package com.br.VotaCoop.model;
+package com.br.VotaCoop.domain.model;
 
 import jakarta.persistence.*;
 import lombok.Getter;
