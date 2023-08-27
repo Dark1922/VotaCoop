@@ -27,9 +27,4 @@ public class VotoController {
         return ResponseEntity.status(HttpStatus.CREATED).body(votoService.saveVoto(votoInput));
     }
 
-    @GetMapping("/{idPauta}/resultado")
-    public ResponseEntity<ResultadoVotacaoDTO> getResultadoVotacao(@PathVariable Long idPauta) {
-        ResultadoVotacaoDTO resultado = votoService.getResultadoVotacao(idPauta);
-        return ResponseEntity.ok(resultado);
-    }
 }
