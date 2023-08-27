@@ -4,7 +4,7 @@ import jakarta.persistence.EntityNotFoundException;
 
 import java.io.Serial;
 
-public class VotoNotFoundException extends EntityNotFoundException {
+public class VotoNotFoundException extends NegocioException {
 
     @Serial
     private static final long serialVersionUID = 1L;

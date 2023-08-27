@@ -5,6 +5,9 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.time.LocalDateTime;
+
+@Getter
+@Setter
 @Entity
 @Table(name = "voto")
 public class Voto {
@@ -27,43 +30,4 @@ public class Voto {
     @Column(name = "data_voto", nullable = false)
     private LocalDateTime dataVoto;
 
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public SessaoVotacao getSessaoVotacao() {
-        return sessaoVotacao;
-    }
-
-    public void setSessaoVotacao(SessaoVotacao sessaoVotacao) {
-        this.sessaoVotacao = sessaoVotacao;
-    }
-
-    public Associado getAssociado() {
-        return associado;
-    }
-
-    public void setAssociado(Associado associado) {
-        this.associado = associado;
-    }
-
-    public String getValor() {
-        return valor;
-    }
-
-    public void setValor(String valor) {
-        this.valor = valor;
-    }
-
-    public LocalDateTime getDataVoto() {
-        return dataVoto;
-    }
-
-    public void setDataVoto(LocalDateTime dataVoto) {
-        this.dataVoto = dataVoto;
-    }
 }

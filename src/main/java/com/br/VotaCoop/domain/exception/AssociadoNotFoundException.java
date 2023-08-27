@@ -4,7 +4,7 @@ import jakarta.persistence.EntityNotFoundException;
 
 import java.io.Serial;
 
-public class AssociadoNotFoundException extends EntityNotFoundException {
+public class AssociadoNotFoundException extends NegocioException {
 
     @Serial
     private static final long serialVersionUID = 1L;
