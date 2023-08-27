@@ -2,6 +2,7 @@ package com.br.VotaCoop.domain.model;
 
 import jakarta.persistence.*;
 import lombok.*;
+import org.hibernate.annotations.CreationTimestamp;
 
 import java.time.LocalDateTime;
 @Getter
@@ -20,6 +21,7 @@ public class Pauta {
     @Column(name = "tema", nullable = false)
     private String tema;
 
-    @Column(name = "data_criacao", nullable = false)
+    @CreationTimestamp
+    @Column(name = "data_criacao", updatable = false, nullable = false)
     private LocalDateTime dataCriacao;
 }

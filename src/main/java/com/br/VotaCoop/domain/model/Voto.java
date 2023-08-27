@@ -3,6 +3,7 @@ package com.br.VotaCoop.domain.model;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
+import org.hibernate.annotations.CreationTimestamp;
 
 import java.time.LocalDateTime;
 
@@ -27,7 +28,8 @@ public class Voto {
     @Column(name = "valor", nullable = false)
     private String valor;
 
-    @Column(name = "data_voto", nullable = false)
+    @CreationTimestamp
+    @Column(name = "data_voto", updatable = false, nullable = false)
     private LocalDateTime dataVoto;
 
 }
