@@ -4,12 +4,12 @@ import jakarta.persistence.EntityNotFoundException;
 
 import java.io.Serial;
 
-public class VotoNotFoundException extends EntityNotFoundException {
+public class PautaNotFoundException extends EntityNotFoundException {
 
     @Serial
     private static final long serialVersionUID = 1L;
 
-	public VotoNotFoundException(String mensagem) {
+	public PautaNotFoundException(String mensagem) {
             super(mensagem);
         }
 }

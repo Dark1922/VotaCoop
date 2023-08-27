@@ -19,7 +19,7 @@ import java.util.List;
 @Service
 public class AssociadoServiceImpl implements AssociadoService {
 
-    private static final String MSG_ASSOCIADO_NAO_ENCOTNADO = "Não existe um cadastro de cliente com código %d";
+    private static final String MSG_ASSOCIADO_NAO_ENCOTNADO = "Não existe um cadastro de Associado com código %d";
 
     private AssociadoRepository associadoRepository;
     private AssociadoInputDissasembler associadoInputDissasembler;

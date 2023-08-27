@@ -27,7 +27,7 @@ public class AssociadoController {
     }
 
     @GetMapping("/page")
-    public ResponseEntity<Page<AssociadoDTO>> listarFuncionariosPage(
+    public ResponseEntity<Page<AssociadoDTO>> listarAssociadosPage(
             @PageableDefault(size = 5, sort = "nome") Pageable pageable) {
         return ResponseEntity.ok(associadoService.findAllPage(pageable));
     }

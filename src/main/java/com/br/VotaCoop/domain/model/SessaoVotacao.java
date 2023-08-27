@@ -1,13 +1,8 @@
 package com.br.VotaCoop.domain.model;
 
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.Setter;
-
 import java.time.LocalDateTime;
 
-@Getter
-@Setter
 @Entity
 @Table(name = "sessao_votacao")
 public class SessaoVotacao {
@@ -28,4 +23,44 @@ public class SessaoVotacao {
 
     @Column(name = "status", nullable = false)
     private String status;
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public Pauta getPauta() {
+        return pauta;
+    }
+
+    public void setPauta(Pauta pauta) {
+        this.pauta = pauta;
+    }
+
+    public LocalDateTime getDataInicio() {
+        return dataInicio;
+    }
+
+    public void setDataInicio(LocalDateTime dataInicio) {
+        this.dataInicio = dataInicio;
+    }
+
+    public Integer getDuracao() {
+        return duracao;
+    }
+
+    public void setDuracao(Integer duracao) {
+        this.duracao = duracao;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
 }

@@ -1,42 +1,63 @@
 package com.br.VotaCoop.domain.service.impl;
 
-import com.br.VotaCoop.api.assembler.VotoInputDissasembler;
-import com.br.VotaCoop.api.assembler.VotoModelAssembler;
-import com.br.VotaCoop.api.dto.Input.VotoInput;
-import com.br.VotaCoop.api.dto.VotoDTO;
+import com.br.VotaCoop.api.assembler.PautaInputDissasembler;
+import com.br.VotaCoop.api.assembler.PautaModelAssembler;
+import com.br.VotaCoop.api.dto.Input.PautaInput;
+import com.br.VotaCoop.api.dto.PautaDTO;
 import com.br.VotaCoop.domain.exception.VotoNotFoundException;
-import com.br.VotaCoop.domain.model.Voto;
-import com.br.VotaCoop.domain.repository.VotoRepository;
-import com.br.VotaCoop.domain.service.VotoService;
+import com.br.VotaCoop.domain.model.Pauta;
+import com.br.VotaCoop.domain.repository.PautaRepository;
+import com.br.VotaCoop.domain.service.PautaService;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.Pageable;
+import org.springframework.stereotype.Service;
 
-public class VotoServiceImpl implements VotoService {
+import java.util.List;
 
-    private static final String MSG_VOTO_NAO_ENCONTRADO = "Não encontrado com o código %d";
+@Service
+public class PautaServiceImpl implements PautaService {
 
-    private VotoRepository votoRepository;
-    private VotoInputDissasembler votoInputDissasembler;
-    private VotoModelAssembler votoModelAssembler;
+    private static final String MSG_PAUTA_NAO_ENCONTRADO = "Não existe um cadastro de Pauta com código %d";
 
-    public VotoServiceImpl(VotoRepository votoRepository,
-                           VotoInputDissasembler votoInputDissasembler,
-                           VotoModelAssembler votoModelAssembler) {
-        this.votoRepository = votoRepository;
-        this.votoInputDissasembler = votoInputDissasembler;
-        this.votoModelAssembler = votoModelAssembler;
+    private PautaRepository pautaRepository;
+    private PautaInputDissasembler pautaInputDissasembler;
+    private PautaModelAssembler pautaModelAssembler;
+
+    public PautaServiceImpl(PautaRepository pautaRepository,
+                            PautaInputDissasembler pautaInputDissasembler,
+                            PautaModelAssembler pautaModelAssembler) {
+        this.pautaRepository = pautaRepository;
+        this.pautaInputDissasembler = pautaInputDissasembler;
+        this.pautaModelAssembler = pautaModelAssembler;
     }
     @Override
-    public VotoDTO findById(Long idVoto) {
-        return votoModelAssembler.toModel(buscarOuFalhar(idVoto));
+    public PautaDTO findById(Long idPauta) {
+        return pautaModelAssembler.toModel(buscarOuFalhar(idPauta));
     }
 
+    public List<PautaDTO> findAll() {
+        return pautaModelAssembler.toCollectionModel(pautaRepository.findAll());
+    }
+
+    public Page<PautaDTO> findAllPage(Pageable pageable) {
+        Page<Pauta> pautassPage = pautaRepository.findAll(pageable);
+        List<PautaDTO> pautasDTO = pautaModelAssembler.toCollectionModel(pautassPage.getContent());
+        Page<PautaDTO> pautasDTOPage = new PageImpl<>(pautasDTO, pageable, pautassPage.getTotalElements());
+        return pautasDTOPage;
+    }
     @Override
-    public VotoDTO saveVoto(VotoInput votoInput) {
-            Voto voto = votoInputDissasembler.toDomainObject(votoInput);
-            return votoModelAssembler.toModel(votoRepository.save(voto));
+    public PautaDTO saveVoto(PautaInput pautaInput) {
+            Pauta pauta = pautaInputDissasembler.toDomainObject(pautaInput);
+            return pautaModelAssembler.toModel(pautaRepository.save(pauta));
         }
 
-    public Voto buscarOuFalhar(Long id) {
-        return votoRepository.findById(id)
-                .orElseThrow(() -> new VotoNotFoundException(String.format(MSG_VOTO_NAO_ENCONTRADO, id)));
+    @Override
+    public Page<PautaDTO> findByNomeContaining(String tema, Pageable pageable) {
+        return pautaModelAssembler.toCollectionModelPage(pautaRepository.findByTemaContaining(tema.toUpperCase(), pageable));
+    }
+    public Pauta buscarOuFalhar(Long id) {
+        return pautaRepository.findById(id)
+                .orElseThrow(() -> new VotoNotFoundException(String.format(MSG_PAUTA_NAO_ENCONTRADO, id)));
     }
 }

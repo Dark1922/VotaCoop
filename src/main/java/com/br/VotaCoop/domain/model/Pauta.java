@@ -17,6 +17,9 @@ public class Pauta {
     @Column(name = "descricao", nullable = false)
     private String descricao;
 
+    @Column(name = "tema", nullable = false)
+    private String tema;
+
     @Column(name = "data_criacao", nullable = false)
     private LocalDateTime dataCriacao;
 }

@@ -1,13 +1,26 @@
 package com.br.VotaCoop.api.dto.Input;
 
-import com.br.VotaCoop.domain.model.Pauta;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
 
-@Setter
-@Getter
+@Data
 public class SessaoVotacaoInput {
-    private Pauta pauta;
+    private long idPauta;
     private Integer duracao;
-    private String status;
+
+    public long getIdPauta() {
+        return idPauta;
+    }
+
+    public void setIdPauta(long idPauta) {
+        this.idPauta = idPauta;
+    }
+
+    public Integer getDuracao() {
+        return duracao;
+    }
+
+    public void setDuracao(Integer duracao) {
+        this.duracao = duracao;
+    }
+
 }

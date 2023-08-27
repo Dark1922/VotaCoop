@@ -4,12 +4,12 @@ import jakarta.persistence.EntityNotFoundException;
 
 import java.io.Serial;
 
-public class SessaoVotacaoNotFoundException extends EntityNotFoundException {
+public class SessaoVotacaoEncerradaException extends EntityNotFoundException {
 
     @Serial
     private static final long serialVersionUID = 1L;
 
-	public SessaoVotacaoNotFoundException(String mensagem) {
+	public SessaoVotacaoEncerradaException(String mensagem) {
             super(mensagem);
         }
 }

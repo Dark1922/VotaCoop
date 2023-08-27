@@ -1,11 +1,13 @@
 package com.br.VotaCoop.domain.service;
 
-import com.br.VotaCoop.api.dto.Input.VotoInput;
-import com.br.VotaCoop.api.dto.VotoDTO;
+import com.br.VotaCoop.api.dto.Input.SessaoVotacaoInput;
+import com.br.VotaCoop.api.dto.SessaoVotacaoDTO;
+import com.br.VotaCoop.domain.model.SessaoVotacao;
 
 
-public interface PautaService {
-
-     VotoDTO findById(Long idVoto);
-     VotoDTO saveVoto(VotoInput votoInput);
+public interface SessaoVotacaoService {
+     SessaoVotacaoDTO findById(Long idSessaoVotacao);
+     SessaoVotacao iniciarSessao(SessaoVotacaoInput input);
+     boolean isSessaoVotacaoAberta(Long sessaoId);
+     SessaoVotacao buscarOuFalhar(Long id);
 }

@@ -1,19 +1,11 @@
 package com.br.VotaCoop.domain.service;
 
-import com.br.VotaCoop.api.dto.AssociadoDTO;
-import com.br.VotaCoop.api.dto.Input.AssociadoInput;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
+import com.br.VotaCoop.api.dto.Input.VotoInput;
+import com.br.VotaCoop.api.dto.VotoDTO;
 
-import java.util.List;
 
-public interface AssociadoService {
+public interface VotoService {
 
-    List<AssociadoDTO> findAll();
-    Page<AssociadoDTO> findAllPage(Pageable pageable);
-     AssociadoDTO findById(Long idAssociado);
-     AssociadoDTO saveAssociado(AssociadoInput associadoInput);
-     AssociadoDTO updateAssociado(Long idAssociado, AssociadoInput associadoInput);
-     void delete(Long idAssociado);
-
+     VotoDTO findById(Long idVoto);
+     VotoDTO saveVoto(VotoInput votoInput);
 }
