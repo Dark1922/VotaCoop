@@ -43,7 +43,7 @@ import java.util.Optional;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @AutoConfigureMockMvc
-@TestPropertySource(locations = "classpath:properties-teste.properties")
+@TestPropertySource(locations = "classpath:application-teste.properties")
 public class AssociadoServiceImplTest {
 
     @InjectMocks
