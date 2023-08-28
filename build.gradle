@@ -49,6 +49,8 @@ dependencies {
 	implementation 'com.fasterxml.jackson.core:jackson-databind:2.12.3'
 	testImplementation 'io.rest-assured:rest-assured:5.3.1'
 	testImplementation 'com.h2database:h2:2.2.220'
+	implementation 'org.flywaydb:flyway-core:9.21.2'
+
 
 
 }
