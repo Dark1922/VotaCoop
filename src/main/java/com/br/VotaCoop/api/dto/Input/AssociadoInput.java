@@ -16,6 +16,5 @@ public class AssociadoInput {
 
     @NotBlank
     @NotNull
-    @CPF
     private String cpf;
 }

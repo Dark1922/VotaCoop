@@ -101,9 +101,13 @@ public class AssociadoServiceImplTest {
     public void testDeleteAssociado() {
         Long id = 1L;
         doNothing().when(associadoRepository).deleteById(id);
+
+        // Chame o método real do serviço que invocará o método mockado
         associadoService.delete(id);
+
         verify(associadoRepository, times(1)).deleteById(id);
     }
+
 
     @Test
     public void testDeleteAssociadoNotFound() {
@@ -116,7 +120,7 @@ public class AssociadoServiceImplTest {
     public void testBuscarOuFalhar() {
         Long id = 1L;
         Associado associado = new Associado();
-        associado.setNome("Nome Teste");
+        associado.setNome("Luiz da silva");
         associado.setCpf("12345678901");
         when(associadoRepository.findById(id)).thenReturn(java.util.Optional.of(associado));
         assertEquals(associado, associadoService.buscarOuFalhar(id));
@@ -189,12 +193,13 @@ public class AssociadoServiceImplTest {
     @Test
     public void testGetAssociadoById() {
         given()
+                .pathParam("idAssociado", 1)
                 .accept("application/json")
                 .when()
-                .get("/associado/1")
+                .get("/{idAssociado}")
                 .then()
                 .statusCode(200)
-                .body("nome", equalTo("Nome Teste"))
+                .body("nome", equalTo("Luiz da silva"))
                 .body("cpf", equalTo("12345678901"));
     }
 

@@ -3,14 +3,31 @@ import io.gatling.http.Predef._
 
 import scala.concurrent.duration._
 import scala.language.postfixOps
+import scala.util.Random
+import scala.util.Random
 
 class VoteSimulation extends Simulation {
+
+  def generateCPF(): String = {
+    val rnd = (n: Int) => Random.nextInt(n)
+    val mod = (base: Int, div: Int) => base - (base / div) * div
+    val n = Array.fill(9)(rnd(9))
+
+    var d1 = n.zipWithIndex.map { case (number, index) => number * (10 - index) }.sum
+    d1 = 11 - mod(d1, 11)
+    if (d1 >= 10) d1 = 0
+
+    var d2 = (d1 * 2) + n.zipWithIndex.map { case (number, index) => number * (11 - index) }.sum
+    d2 = 11 - mod(d2, 11)
+    if (d2 >= 10) d2 = 0
+
+    s"${n.mkString}${d1}${d2}"
+  }
 
   val httpProtocol = http
     .baseUrl("http://localhost:8080")
     .header("Accept", "application/json")
 
-  // Etapa 1: Criar a pauta e capturar o ID da pauta
   val createPauta = exec(
     http("Create Pauta")
       .post("/pauta")
@@ -18,7 +35,6 @@ class VoteSimulation extends Simulation {
       .check(jsonPath("$.id").saveAs("idPauta"))
   ).pause(100 milliseconds)
 
-  // Etapa 2: Criar a sessão de votação usando o ID da pauta e depois capturar o ID da sessão
   val createSession = exec(
     http("Open Voting Session")
       .post("/sessao_votacao")
@@ -26,28 +42,44 @@ class VoteSimulation extends Simulation {
       .check(jsonPath("$.id").saveAs("idSessaoVotacao"))
   ).pause(100 milliseconds)
 
-  // Etapa 3: Criar associados e votar com cada associado
   val createAssociadosAndVote = repeat(5000) {
-    exec(
-      http("Create Associado")
-        .post("/associado")
-        .body(StringBody("""{ "nome": "Nome do Associado", "cpf": "12345678901" }""")).asJson
-        .check(jsonPath("$.id").saveAs("idAssociado"))
-    )
+    exec(session => session.set("cpf", generateCPF()))
+      .exec(
+        http("Create Associado")
+          .post("/associado")
+          .body(StringBody("""{ "nome": "Nome do Associado", "cpf": "${cpf}" }""")).asJson
+          .check(status.is(201))
+          .check(jsonPath("$.id").saveAs("idAssociado"))
+          .check(bodyString.saveAs("responseBody"))
+      )
+      .exec(session => {
+        println(s"Response from Create Associado: ${session("responseBody").as[String]}")
+        session
+      })
       .exec(
         http("Register and Vote")
           .post("/voto")
-          .body(StringBody("""{ "idSessaoVotacao": "${idSessaoVotacao}", "idAssociado": "${idAssociado}", "valor": "Sim" }""")).asJson
-      ).pause(0.001 milliseconds)
+          .body(StringBody(session => {
+            val randomVote = if (Random.nextBoolean()) "Sim" else "Não"
+            s"""{ "idSessaoVotacao": "${session("idSessaoVotacao").as[String]}", "idAssociado": "${session("idAssociado").as[String]}", "valor": "$randomVote" }"""
+          })).asJson
+          .check(status.is(201))
+          .check(bodyString.saveAs("responseBody"))
+      )
+      .exec(session => {
+        println(s"Response from Create Voto: ${session("responseBody").as[String]}")
+        session
+      })
+      .pause(0.001 milliseconds)
   }
 
   val scn = scenario("Vote cenario")
-    .exec(createPauta, createSession) // Primeira etapa: criar pauta e sessão de votação
-    .exec(createAssociadosAndVote) // Segunda etapa: criar associados e votar com cada associado
+    .exec(createPauta, createSession)
+    .exec(createAssociadosAndVote)
 
   setUp(
     scn.inject(
-      atOnceUsers(1) // Criação de pauta, sessão de votação, associados e votos
+      atOnceUsers(1)
     )
   ).protocols(httpProtocol)
 }
