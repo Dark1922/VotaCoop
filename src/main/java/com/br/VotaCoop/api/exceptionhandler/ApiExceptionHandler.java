@@ -1,6 +1,7 @@
 package com.br.VotaCoop.api.exceptionhandler;
 
 import com.br.VotaCoop.core.validation.ValidationException;
+import com.br.VotaCoop.domain.exception.EntidadeNaoEncontradaException;
 import com.br.VotaCoop.domain.exception.NegocioException;
 import com.fasterxml.jackson.databind.JsonMappingException.Reference;
 import com.fasterxml.jackson.databind.exc.InvalidFormatException;
@@ -247,6 +248,17 @@ public class ApiExceptionHandler extends ResponseEntityExceptionHandler {
 
         return Problem.builder().timestamp(OffsetDateTime.now()).status(Integer.valueOf(status.value())).type(problemType.getUri())
                 .title(problemType.getTitle()).detail(detail);
+    }
+    @ExceptionHandler(EntidadeNaoEncontradaException.class)
+    public ResponseEntity<?> handleAssociadoNaoEncontrado(EntidadeNaoEncontradaException ex, WebRequest request) {
+
+        HttpStatus status = HttpStatus.NOT_FOUND;
+        ProblemType problemType = ProblemType.RECURSO_NAO_ENCONTRADO;
+        String detail = ex.getMessage();
+
+        Problem problem = createProblemBuilder(status, problemType, detail).userMessage(detail).build();
+
+        return handleExceptionInternal(ex, problem, new HttpHeaders(), status, request);
     }
 
 }

@@ -1,10 +1,9 @@
 package com.br.VotaCoop.domain.exception;
 
-import jakarta.persistence.EntityNotFoundException;
 
 import java.io.Serial;
 
-public class PautaNotFoundException extends NegocioException {
+public class PautaNotFoundException extends EntidadeNaoEncontradaException {
 
     @Serial
     private static final long serialVersionUID = 1L;

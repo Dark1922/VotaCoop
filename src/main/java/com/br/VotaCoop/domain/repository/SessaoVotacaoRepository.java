@@ -31,4 +31,7 @@ public interface SessaoVotacaoRepository extends JpaRepository<SessaoVotacao, Lo
                     "GROUP BY p.tema;",
             nativeQuery = true)
     Tuple getResultadoVotacao(@Param("idSessaoVotacao") Long idSessao);
+    SessaoVotacao findByPautaIdAndStatus(Long idPauta, String status);
+
+
 }

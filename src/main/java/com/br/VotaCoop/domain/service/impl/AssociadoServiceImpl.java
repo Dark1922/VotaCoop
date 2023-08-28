@@ -5,6 +5,7 @@ import com.br.VotaCoop.api.assembler.AssociadoModelAssembler;
 import com.br.VotaCoop.api.dto.AssociadoDTO;
 import com.br.VotaCoop.api.dto.Input.AssociadoInput;
 import com.br.VotaCoop.domain.exception.AssociadoNotFoundException;
+import com.br.VotaCoop.domain.exception.ValidationException;
 import com.br.VotaCoop.domain.model.Associado;
 import com.br.VotaCoop.domain.repository.AssociadoRepository;
 import com.br.VotaCoop.domain.service.AssociadoService;
@@ -20,6 +21,8 @@ import java.util.List;
 public class AssociadoServiceImpl implements AssociadoService {
 
     private static final String MSG_ASSOCIADO_NAO_ENCOTNADO = "Não existe um cadastro de Associado com código %d";
+    private static final String CPF_JA_CADASTRO = "O CPF informado já foi cadastrado no sistema. %s";
+    private static final String CPF_EM_USO = "O CPF já está em uso por outro usuário. %s";
 
     private AssociadoRepository associadoRepository;
     private AssociadoInputDissasembler associadoInputDissasembler;
@@ -49,19 +52,33 @@ public class AssociadoServiceImpl implements AssociadoService {
     }
     @Override
     public AssociadoDTO saveAssociado(AssociadoInput associadoInput) {
-        Associado associado = associadoInputDissasembler.toDomainObject(associadoInput);
-        return associadoModelAssembler.toModel(associadoRepository.save(associado));
+
+        if(associadoRepository.existsByCpf(associadoInput.getCpf())) {
+            throw new ValidationException(String.format(CPF_JA_CADASTRO, associadoInput.getCpf()));
+        }
+            Associado associado = associadoInputDissasembler.toDomainObject(associadoInput);
+            return associadoModelAssembler.toModel(associadoRepository.save(associado));
     }
     @Override
     public AssociadoDTO updateAssociado(Long idAssociado, AssociadoInput associadoInput) {
         Associado associadoAtual = buscarOuFalhar(idAssociado);
+
+        // Verifica se o CPF é diferente e já existe no banco de dados
+        if (!associadoInput.getCpf().equals(associadoAtual.getCpf())
+                && associadoRepository.existsByCpf(associadoInput.getCpf())) {
+            throw new ValidationException(String.format(CPF_EM_USO, associadoInput.getCpf()));
+        }
+
         associadoInputDissasembler.copyToDomainObject(associadoInput, associadoAtual);
         return associadoModelAssembler.toModel(associadoRepository.save(associadoAtual));
     }
+
     @Override
     public void delete(Long idAssociado) {
         try {
-            associadoRepository.deleteById(idAssociado);
+            if(buscarOuFalhar(idAssociado) != null) {
+                associadoRepository.deleteById(idAssociado);
+            }
         } catch(EmptyResultDataAccessException e){
             throw new AssociadoNotFoundException(String.format(MSG_ASSOCIADO_NAO_ENCOTNADO, idAssociado));
         }

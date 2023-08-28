@@ -58,15 +58,26 @@ public class SessaoVotacaoServiceImpl implements SessaoVotacaoService {
 
     @Override
     public SessaoVotacao iniciarSessao(SessaoVotacaoInput input) {
-        Pauta pautaExistente = pautaService.buscarOuFalhar(input.getIdPauta());
-        SessaoVotacao novaSessao = sessaoVotacaoInputDissasembler.toDomainObject(input);
 
+        // Verifica se a pauta existe
+        Pauta pautaExistente = pautaService.buscarOuFalhar(input.getIdPauta());
+
+        // Verifica se já existe uma sessão de votação aberta para a pauta
+        Optional<SessaoVotacao> sessaoExistente = Optional.ofNullable(sessaoVotacaoRepository.findByPautaIdAndStatus(input.getIdPauta(), ABERTA));
+        if (sessaoExistente.isPresent()) {
+            throw new ValidationException("Já existe uma sessão de votação aberta para esta pauta.");
+        }
+
+        // Cria uma nova instância de SessaoVotacao
+        SessaoVotacao novaSessao = new SessaoVotacao();
         novaSessao.setPauta(pautaExistente);
         novaSessao.setDataInicio(LocalDateTime.now());
         novaSessao.setStatus(ABERTA);
+        novaSessao.setDuracao(input.getDuracao() == null ? 1 : input.getDuracao());
 
         return sessaoVotacaoRepository.save(novaSessao);
     }
+
 
     @Override
     public boolean isSessaoVotacaoAberta(Long sessaoId) {
@@ -92,6 +103,8 @@ public class SessaoVotacaoServiceImpl implements SessaoVotacaoService {
             messageProducer.sendMessage(getResultadoVotacao(sessaoId));
         }
     }
+
+    /*Verifica a cada 1 minuto todas sessão de votação em aberta se já passou o tempo de duração para colocar como fechada */
     @Scheduled(cron = "0 */1 * * * *")
     public void encerrarSessoesExpiradas() throws Exception {
         List<SessaoVotacao> sessoesAtivas = sessaoVotacaoRepository.findByStatusContaining(ABERTA);

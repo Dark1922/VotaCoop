@@ -15,6 +15,7 @@ import com.br.VotaCoop.domain.repository.AssociadoRepository;
 import com.br.VotaCoop.domain.service.impl.AssociadoServiceImpl;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import io.restassured.RestAssured;
+import io.restassured.http.ContentType;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
@@ -29,6 +30,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.jdbc.Sql;
@@ -72,10 +74,15 @@ public class AssociadoServiceImplTest {
     @BeforeEach
     public void setup() {
         MockitoAnnotations.openMocks(this);
+        RestAssured.enableLoggingOfRequestAndResponseIfValidationFails();
+        RestAssured.port = port;
+        RestAssured.basePath = "/associado";
     }
 
     @Autowired
     private MockMvc mockMvc;
+
+    private static final int ASSOCIADO_ID_INEXISTENTE = 100;
 
     @Test
     public void testSaveAssociado() {
@@ -191,6 +198,16 @@ public class AssociadoServiceImplTest {
                 .body("cpf", equalTo("12345678901"));
     }
 
+    @Test
+    public void deveRetornarStatus404_QuandoConsultarAssociadoInexistente() {
+        given()
+                .pathParam("idAssociado", ASSOCIADO_ID_INEXISTENTE)
+                .accept(ContentType.JSON)
+                .when()
+                .get("/{idAssociado}")
+                .then()
+                .statusCode(HttpStatus.NOT_FOUND.value());
+    }
 }
 
 

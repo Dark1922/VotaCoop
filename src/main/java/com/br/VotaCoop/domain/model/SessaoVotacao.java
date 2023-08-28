@@ -24,7 +24,7 @@ public class SessaoVotacao {
     private LocalDateTime dataInicio;
 
     @Column(name = "duracao", nullable = false)
-    private Integer duracao;
+    private Integer duracao = 1;
 
     @Column(name = "status", nullable = false)
     private String status;

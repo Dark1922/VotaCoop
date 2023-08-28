@@ -11,5 +11,8 @@ public class PautaInput {
     @NotBlank
     @NotNull
     private String tema;
+
+    @NotBlank
+    @NotNull
     private String descricao;
 }
