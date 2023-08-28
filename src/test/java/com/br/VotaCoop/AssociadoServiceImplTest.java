@@ -180,12 +180,11 @@ public class AssociadoServiceImplTest {
 
     /*Testes de integrações*/
     @Test
-    @Sql(scripts = "/dados.sql")
     public void testGetAssociadoById() {
         given()
                 .accept("application/json")
                 .when()
-                .get("/associados/1")
+                .get("/associado/1")
                 .then()
                 .statusCode(200)
                 .body("nome", equalTo("Nome Teste"))
