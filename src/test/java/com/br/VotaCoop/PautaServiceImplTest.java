@@ -100,7 +100,6 @@ class PautaServiceImplTest {
     void testFindByNomeContaining() {
         Pageable pageable = PageRequest.of(0, 10);
         pautaService.findByNomeContaining("tema", pageable);
-
         verify(pautaRepository).findByTemaContaining("TEMA", pageable);
     }
 

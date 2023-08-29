@@ -5,7 +5,6 @@ import com.br.VotaCoop.api.dto.Input.AssociadoInput;
 import com.br.VotaCoop.domain.model.Associado;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.http.ResponseEntity;
 
 import java.util.List;
 

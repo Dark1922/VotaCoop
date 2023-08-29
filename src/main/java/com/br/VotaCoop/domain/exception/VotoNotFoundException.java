@@ -1,6 +1,5 @@
 package com.br.VotaCoop.domain.exception;
 
-import jakarta.persistence.EntityNotFoundException;
 
 import java.io.Serial;
 

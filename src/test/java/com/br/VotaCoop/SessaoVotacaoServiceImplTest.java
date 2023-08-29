@@ -1,11 +1,9 @@
 package com.br.VotaCoop;
 
 import com.br.VotaCoop.api.dto.Input.SessaoVotacaoInput;
-import com.br.VotaCoop.api.dto.ResultadoVotacaoDTO;
 import com.br.VotaCoop.domain.repository.SessaoVotacaoRepository;
 import com.br.VotaCoop.domain.service.impl.SessaoVotacaoServiceImpl;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import jakarta.persistence.Tuple;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.MockitoAnnotations;
@@ -16,11 +14,6 @@ import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
-
-import static org.hibernate.validator.internal.util.Contracts.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
 
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
