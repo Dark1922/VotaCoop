@@ -72,6 +72,8 @@ gh gh repo clone Dark1922/VotaCoop
 
 ./gradlew build
 
+#Criar um database chamado pauta
+
 comando docker para startar o rabbitmq
 
 docker pull rabbitmq:management
