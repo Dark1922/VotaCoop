@@ -1,0 +1,300 @@
+{
+	"info": {
+		"_postman_id": "b359e182-3f4a-44d8-a653-e3bcb74a93f6",
+		"name": "votoCoop",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "20306873"
+	},
+	"item": [
+		{
+			"name": "associado",
+			"item": [
+				{
+					"name": "add associado",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nome\": \"João Victor Martins de Matos\",\r\n    \"cpf\": \"05821259100\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/associado",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"associado"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update associado",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nome\": \"João Victor Martins de 21\",\r\n    \"cpf\": \"05821275130\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/associado/2",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"associado",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "find by id Associado",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/associado/1",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"associado",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "find all Associado page",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/associado/page",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"associado",
+								"page"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Pauta",
+			"item": [
+				{
+					"name": "add Pauta",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n     \"tema\":\"tester\",\r\n    \"descricao\":\"teste\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/pauta",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"pauta"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "find by id pauta",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n     \"tema\":\"midia digital\",\r\n    \"descricao\":\"teste\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/pauta/2",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"pauta",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "find by tema pauta",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/pauta/find/t/page",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"pauta",
+								"find",
+								"t",
+								"page"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "VOTO",
+			"item": [
+				{
+					"name": "VOTAR",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"idSessaoVotacao\": 1,\r\n    \"idAssociado\": 2,\r\n    \"valor\": \"Sim\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/voto",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"voto"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Sessao Votacao",
+			"item": [
+				{
+					"name": "criar sessao de votacao",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"idPauta\":1,\r\n    \"duracao\": 3\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/sessao_votacao",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"sessao_votacao"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "CONTABILIZAÇÃO DE VOTOS NA PAUTA",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"idSessaoVotacao\": 1,\r\n    \"idAssociado\": 2,\r\n    \"valor\": \"Sim\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/sessao_votacao/5/resultado",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"sessao_votacao",
+								"5",
+								"resultado"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
