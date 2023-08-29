@@ -31,6 +31,7 @@ public class SessaoVotacaoServiceImpl implements SessaoVotacaoService {
     private static final String FECHADA = "fechada";
     private static final String SESSAO_ENCERRADA = "A sessão de votação já foi encerrada.";
     private static final String MSG_CONSULTA_SEM_REGISTRO = "Não há resultados de votação para esta pauta";
+    private static final String MSG_JA_EXISTE_SESSAO = "Já existe uma sessão de votação aberta para esta pauta.";
 
 
     private SessaoVotacaoRepository sessaoVotacaoRepository;
@@ -65,7 +66,7 @@ public class SessaoVotacaoServiceImpl implements SessaoVotacaoService {
         // Verifica se já existe uma sessão de votação aberta para a pauta
         Optional<SessaoVotacao> sessaoExistente = Optional.ofNullable(sessaoVotacaoRepository.findByPautaIdAndStatus(input.getIdPauta(), ABERTA));
         if (sessaoExistente.isPresent()) {
-            throw new ValidationException("Já existe uma sessão de votação aberta para esta pauta.");
+            throw new ValidationException("");
         }
 
         // Cria uma nova instância de SessaoVotacao

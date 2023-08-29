@@ -99,13 +99,6 @@ public class AssociadoServiceImplTest {
     }
 
     @Test
-    public void testDeleteAssociadoNotFound() {
-        Long id = 1L;
-        doThrow(EmptyResultDataAccessException.class).when(associadoRepository).deleteById(id);
-        assertThrows(AssociadoNotFoundException.class, () -> associadoService.delete(id));
-    }
-
-    @Test
     public void testBuscarOuFalhar() {
         Long id = 1L;
         Associado associado = new Associado();

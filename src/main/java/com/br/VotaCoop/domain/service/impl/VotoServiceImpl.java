@@ -79,5 +79,8 @@ public class VotoServiceImpl implements VotoService {
                 .orElseThrow(() -> new VotoNotFoundException(String.format(MSG_VOTO_NAO_ENCONTRADO, id)));
     }
 
+    public void setSessaoVotacaoService(SessaoVotacaoService sessaoVotacaoService) {
+        this.sessaoVotacaoService = sessaoVotacaoService;
+    }
 
 }
