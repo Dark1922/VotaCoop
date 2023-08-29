@@ -66,7 +66,7 @@ public class SessaoVotacaoServiceImpl implements SessaoVotacaoService {
         // Verifica se já existe uma sessão de votação aberta para a pauta
         Optional<SessaoVotacao> sessaoExistente = Optional.ofNullable(sessaoVotacaoRepository.findByPautaIdAndStatus(input.getIdPauta(), ABERTA));
         if (sessaoExistente.isPresent()) {
-            throw new ValidationException("");
+            throw new ValidationException(MSG_JA_EXISTE_SESSAO);
         }
 
         // Cria uma nova instância de SessaoVotacao
