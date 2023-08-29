@@ -72,8 +72,6 @@ gh gh repo clone Dark1922/VotaCoop
 
 ./gradlew build
 
-starta o projeto
-
 comando docker para startar o rabbitmq
 
 docker pull rabbitmq:management
