@@ -80,7 +80,7 @@ docker pull rabbitmq:management
 
 docker run -d --name rabbitmq -p 15672:15672 -p 5672:5672 rabbitmq:management
 
-http://localhost:15672/  url para ter acesso a mensageria e vê as mensagem enviado pelo servido após as sessão de votação ser encerrada.
+http://localhost:15672/  url para ter acesso a mensageria e vê as mensagem enviada pelo servido após as sessão de votação ser encerrada.
 
 
 ```
