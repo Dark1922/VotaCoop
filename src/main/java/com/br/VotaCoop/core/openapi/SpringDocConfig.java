@@ -38,9 +38,9 @@ public class SpringDocConfig {
     public OpenAPI openAPIv1() {
         return new OpenAPI()
                 .info(new Info()
-                        .title("Crysten API")
+                        .title("Voto Coop API")
                         .version("v1")
-                        .description("REST API da Biblioteca Crysten")
+                        .description("REST API da Voto Coop")
                         .license(new License()
                                 .name("Apache 2.0")
                                 .url("https://springdoc.org/")
