@@ -32,6 +32,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.web.servlet.MockMvc;
@@ -96,18 +97,6 @@ public class AssociadoServiceImplTest {
 
         verify(associadoRepository, times(1)).save(associado);
     }
-
-    @Test
-    public void testDeleteAssociado() {
-        Long id = 1L;
-        doNothing().when(associadoRepository).deleteById(id);
-
-        // Chame o método real do serviço que invocará o método mockado
-        associadoService.delete(id);
-
-        verify(associadoRepository, times(1)).deleteById(id);
-    }
-
 
     @Test
     public void testDeleteAssociadoNotFound() {

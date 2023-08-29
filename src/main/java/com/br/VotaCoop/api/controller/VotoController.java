@@ -1,9 +1,9 @@
 package com.br.VotaCoop.api.controller;
 
 import com.br.VotaCoop.api.dto.Input.VotoInput;
-import com.br.VotaCoop.api.dto.ResultadoVotacaoDTO;
 import com.br.VotaCoop.api.dto.VotoDTO;
 import com.br.VotaCoop.domain.service.VotoService;
+import com.br.VotaCoop.openapi.VotoControllerOpenApi;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping(path = "/voto")
 @AllArgsConstructor
-public class VotoController {
+public class VotoController implements VotoControllerOpenApi {
 
    private VotoService votoService;
 

@@ -11,25 +11,25 @@ import java.util.List;
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @Getter
 @Builder
-@Schema(name = "Problema")
-public class Problem {
+@Schema(name = "Problema404")
+public class Problem404 {
 
-    @Schema(example = "400")
+    @Schema(example = "404")
     private Integer status;
 
-    @Schema(example = "2023-01-03T16:39:13Z")
+    @Schema(example = "2023-01-04T20:28:22-03:00")
     private OffsetDateTime timestamp;
 
-    @Schema(example = "https://localhost:8080/dados-invalidos")
+    @Schema(example = "https://localhost:8080/recurso-nao-encontrado")
     private String type;
 
-    @Schema(example = "Dados inválidos")
+    @Schema(example = "Recurso não encontrado")
     private String title;
 
-    @Schema(example = "Um ou mais campos estão inválidos, Faça o preenchimento correto e tente novamente.")
+    @Schema(example = "O recurso x, que você tentou acessar, é inexistente.")
     private String detail;
 
-    @Schema(example = "Um ou mais campos estão inválidos, Faça o preenchimento correto e tente novamente.")
+    @Schema(example = "O recurso x, que você tentou acessar, é inexistente.")
     private String userMessage;
 
     @Schema(example = "Objetos ou campos que geraram o erro")
@@ -41,10 +41,10 @@ public class Problem {
     @Builder
     public static class Object {
 
-        @Schema(example = "nome")
+        @Schema(example = "cpf")
         private String name;
 
-        @Schema(example = "O nome é obrigatório")
+        @Schema(example = " cpf é obrigatório")
         private String userMessage;
     }
 }

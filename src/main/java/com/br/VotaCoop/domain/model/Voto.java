@@ -21,7 +21,7 @@ public class Voto {
     @JoinColumn(name = "id_sessao", nullable = false)
     private SessaoVotacao sessaoVotacao;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "id_associado", nullable = false)
     private Associado associado;
 

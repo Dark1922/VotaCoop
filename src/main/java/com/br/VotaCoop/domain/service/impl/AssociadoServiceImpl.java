@@ -13,6 +13,7 @@ import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -73,16 +74,6 @@ public class AssociadoServiceImpl implements AssociadoService {
         return associadoModelAssembler.toModel(associadoRepository.save(associadoAtual));
     }
 
-    @Override
-    public void delete(Long idAssociado) {
-        try {
-            if(buscarOuFalhar(idAssociado) != null) {
-                associadoRepository.deleteById(idAssociado);
-            }
-        } catch(EmptyResultDataAccessException e){
-            throw new AssociadoNotFoundException(String.format(MSG_ASSOCIADO_NAO_ENCOTNADO, idAssociado));
-        }
-    }
 
     public Associado buscarOuFalhar(Long id) {
         return associadoRepository.findById(id)

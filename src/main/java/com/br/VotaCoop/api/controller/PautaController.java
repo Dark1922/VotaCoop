@@ -3,6 +3,7 @@ package com.br.VotaCoop.api.controller;
 import com.br.VotaCoop.api.dto.Input.PautaInput;
 import com.br.VotaCoop.api.dto.PautaDTO;
 import com.br.VotaCoop.domain.service.PautaService;
+import com.br.VotaCoop.openapi.PautaControllerOpenApi;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -15,7 +16,7 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping(path = "/pauta")
 @AllArgsConstructor
-public class PautaController {
+public class PautaController implements PautaControllerOpenApi {
 
     private PautaService pautaService;
 

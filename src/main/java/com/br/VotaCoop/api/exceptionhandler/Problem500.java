@@ -11,25 +11,27 @@ import java.util.List;
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @Getter
 @Builder
-@Schema(name = "Problema")
-public class Problem {
+@Schema(name = "Problema500")
+public class Problem500 {
 
-    @Schema(example = "400")
+    @Schema(example = "500")
     private Integer status;
 
     @Schema(example = "2023-01-03T16:39:13Z")
     private OffsetDateTime timestamp;
 
-    @Schema(example = "https://localhost:8080/dados-invalidos")
+    @Schema(example = "https://localhost:8080/erro-de-sistema")
     private String type;
 
-    @Schema(example = "Dados inválidos")
+    @Schema(example = "Erro de sistema")
     private String title;
 
-    @Schema(example = "Um ou mais campos estão inválidos, Faça o preenchimento correto e tente novamente.")
+    @Schema(example = "Ocorreu um erro interno inesperado no sistema. "
+            + "Tente novamente e se o problema persistir, entre em contato " + "com o administrador do sistema.")
     private String detail;
 
-    @Schema(example = "Um ou mais campos estão inválidos, Faça o preenchimento correto e tente novamente.")
+    @Schema(example = "Ocorreu um erro interno inesperado no sistema. "
+            + "Tente novamente e se o problema persistir, entre em contato " + "com o administrador do sistema.")
     private String userMessage;
 
     @Schema(example = "Objetos ou campos que geraram o erro")
@@ -41,10 +43,10 @@ public class Problem {
     @Builder
     public static class Object {
 
-        @Schema(example = "nome")
+        @Schema(example = "preco")
         private String name;
 
-        @Schema(example = "O nome é obrigatório")
+        @Schema(example = "Opreço é obrigatório")
         private String userMessage;
     }
 }
