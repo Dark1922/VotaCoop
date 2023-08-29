@@ -1,0 +1,33 @@
+version: '3'
+
+services:
+  rabbitmq:
+    image: rabbitmq:management
+    ports:
+      - "15672:15672"
+      - "5672:5672"
+
+  postgres:
+    image: postgres:latest
+    environment:
+      POSTGRES_DB: pauta
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: admin
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+
+  my-java-app:
+    build:
+      context: .
+      args:
+        JAR_FILE: VotaCoop-0.0.1-SNAPSHOT.jar
+    ports:
+      - "8080:8080"
+    depends_on:
+      - rabbitmq
+      - postgres
+
+volumes:
+  postgres-data:
