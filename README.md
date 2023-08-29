@@ -10,7 +10,7 @@
 <h4 align="center"> Link de acesso local: http://localhost:8080/swagger-ui/index.html</h4>
 
 
-![image](https://github.com/Dark1922/VotaCoop/assets/48605830/a9d5909e-2bd9-41e4-8f35-73ba6acc9a98)
+![image](https://github.com/Dark1922/VotaCoop/assets/48605830/89586c14-81b8-4a9e-8a88-dee4d81be58b)
 
 
 <hr />
@@ -82,6 +82,9 @@ docker run -d --name rabbitmq -p 15672:15672 -p 5672:5672 rabbitmq:management
 
 http://localhost:15672/  url para ter acesso a mensageria e vê as mensagem enviada pelo servido após as sessão de votação ser encerrada.
 
+#Teste de Performance executar o comando abaixo
+
+./gradlew gatlingRun
 
 ```
 
